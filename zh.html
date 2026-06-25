@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>为什么教授不让我用Pandas？— 从0到0.1的七天旅程</title>
+    <meta name="description" content="一个编程零基础的研究生，用7天时间学会NumPy数据合并的真实故事。没有AI，只有Google。眼泪、报错和安静的骄傲。">
+    <meta name="keywords" content="NumPy, Pandas, Python, 数据合并, 编程初学者, 药物反应预测, 矩阵运算, 数据科学入门">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- ========== NAV ========== -->
+<nav class="blog-nav">
+    <a href="index.html" class="nav-brand">0 → 0.1</a>
+    <div class="lang-switch">
+        <a href="en.html" class="lang-btn">EN</a>
+        <a href="ko.html" class="lang-btn">한국어</a>
+        <a href="zh.html" class="lang-btn active">中文</a>
+    </div>
+</nav>
+
+<!-- ========== HERO ========== -->
+<div class="blog-hero">
+    <h1>为什么教授<strong>不让我用Pandas</strong>？</h1>
+    <p class="sub">一个"笨方法"背后的教育哲学<br>——编程零基础研究生的七天 NumPy 数据合并之旅</p>
+</div>
+
+<div class="blog-container">
+
+<!-- ==================== 序章 ==================== -->
+<div class="chapter">
+    <div class="ch-label">序 章</div>
+    <h2>三个CSV文件，一个不会写代码的人</h2>
+
+    <p>我不是程序员。</p>
+
+    <p>准确地说，七天前的我，连 <code>print("Hello World")</code> 都没写过。我的世界里只有实验台、移液枪和无穷无尽的药物反应数据。我是一名做<span class="hl">药物反应预测研究</span>的研究生，每天和分子打交道，而不是和代码。</p>
+
+    <p>然后有一天，导师把三个CSV文件扔到了我的面前：</p>
+
+    <table>
+        <tr><th>文件名</th><th>行数</th><th>列数</th><th>说明</th></tr>
+        <tr><td>Padel.csv</td><td>217</td><td>2,326</td><td>药物分子描述符</td></tr>
+        <tr><td>Mutation.csv</td><td>21,213</td><td>1,002</td><td>基因突变数据</td></tr>
+        <tr><td>Response.csv</td><td>194,750</td><td>3</td><td>药物-细胞系反应值</td></tr>
+    </table>
+
+    <p>"把这三个文件合并成一个矩阵。" 导师说得轻描淡写，就像在说"去倒杯水"。</p>
+
+    <p>"用Python。"</p>
+
+    <p>他看了我一眼。那种看法，后来我才明白，是一个有经验的教育者在评估学生的眼神。他在想：这个孩子能不能吃得了苦？</p>
+
+    <p>然后他补了一句："先不要用Pandas。用NumPy。"</p>
+
+    <p>我当时不知道Pandas是什么，也不知道NumPy是什么。在我听来这两个词就像两种我没听过的热带水果。</p>
+
+    <p>但我点了点头，装出一副"没问题"的样子。内心在尖叫。</p>
+
+    <div class="mood">😰 📊 😰 📊 😰</div>
+
+    <p>我打开电脑，盯着空白的屏幕。Python？我连安装都不会。Anaconda？Jupyter Notebook？Terminal？每个词都像另一种语言的外星文字。</p>
+
+    <p>光是配置环境就花了一整个晚上。安装Anaconda的时候进度条卡在87%不动了，我以为电脑死机了，差点强制关机。后来发现只是要等一等。</p>
+
+    <p><span class="emotion">编程给我的第一课，不是代码。是耐心。</span></p>
+
+    <p>那一刻，我面前有两条路——</p>
+
+    <p>一条是打开ChatGPT，让AI帮我写代码。五分钟搞定，交差完事。</p>
+
+    <p>一条是关掉所有AI工具，只用Google，一行一行地啃。</p>
+
+    <p><span class="emotion">我选择了第二条。不是因为我高尚，而是因为我害怕——害怕交上去的代码，自己一个字都解释不了。</span></p>
+
+    <div class="quote">
+        "我不需要从0到1，我只需要从0到0.1。<br>
+        但这个0.1，必须是真的。"
+        <span class="author">— 我对自己说的话</span>
+    </div>
+
+    <p>这是接下来七天的故事。</p>
+
+    <p>关于一个什么都不会的人，如何在报错、崩溃和偶尔的顿悟之间，学会了用代码做一件真正有用的事。</p>
+
+    <p>如果你也是零基础，如果你也在某个深夜对着红色的报错信息感到绝望，如果你也曾经想过"我是不是不适合写代码"——那么这篇文章是写给你的。</p>
+
+    <p><span class="emotion">你不孤单。我们都是这样过来的。</span></p>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== DAY 1-2 ==================== -->
+<div class="chapter">
+    <div class="day-mark"><span>DAY 1 — 2</span></div>
+    <h2>第一行代码，手在发抖</h2>
+
+    <div class="mood">🫨 😵‍💫 🤯 😤 💡</div>
+
+    <h3>那个要命的括号</h3>
+
+    <p>Day 1。我在Google上搜了 "Python how to create array"，点开了一个叫Real Python的网站。照着例子，我敲下了人生中第一行有意义的代码：</p>
+
+<pre><code><span class="k">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">)</span>   <span class="c"># 我想创建一个3行4列的零矩阵</span>
+</code></pre>
+
+    <p>手指悬在Enter键上方，停了两秒。</p>
+
+    <p>回车。</p>
+
+<pre><code><span class="e">TypeError: Cannot interpret '4' as a data type</span>
+</code></pre>
+
+    <p><span class="emotion">我盯着这行红色的字，盯了整整三分钟。什么叫 "cannot interpret as a data type"？4不是数字吗？数字怎么就不能当数据类型了？</span></p>
+
+    <p>又搜了15分钟。终于理解了——<code>np.zeros()</code> 接受的是一个<span class="hl">元组</span>，不是两个参数。</p>
+
+<pre><code><span class="c"># ❌ 错误写法</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="o">(</span><span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">)</span>
+
+<span class="c"># ✅ 正确写法</span>
+<span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="o">((</span><span class="n">3</span><span class="o">,</span> <span class="n">4</span><span class="o">))</span>
+</code></pre>
+
+    <p>一个括号。一个多余的括号。15分钟的搜索和困惑。</p>
+
+    <p><span class="emotion">在那之前，我以为编程的难点在于算法、在于数学、在于逻辑。我没想到，第一个绊倒我的东西，是一个括号。</span></p>
+
+    <p>但也就是在这15分钟里，我第一次理解了什么叫<span class="hl">"元组"</span>——<code>(5,)</code> 不是数字5，它是一个形状，一个描述"这个数组长什么样"的东西。</p>
+
+    <div class="tip-box">
+        <strong>💡 给后来者的提示：</strong><br>
+        在NumPy里，<code>shape</code> 永远是一个元组。<code>(5,)</code> 是一维数组，5个元素。<code>(3, 4)</code> 是二维数组，3行4列。那个逗号和括号，不是装饰，是灵魂。
+    </div>
+
+    <h3>axis=0 和 axis=1——脑子短路的时刻</h3>
+
+    <p>Day 2。我满怀信心地打开了Jupyter Notebook，心想"我已经跨过了新手村的第一关"。然后我遇到了 <code>axis</code>。</p>
+
+    <p>"axis=0 沿着行的方向操作" "axis=1 沿着列的方向操作"——每篇教程都这么说，但我的脑子就是转不过来。</p>
+
+    <p><span class="emotion">我坐在窗前，望着外面的天空，发呆了整整10分钟。不是在想别的，就是在想 axis=0 到底是往下还是往右。</span></p>
+
+    <p>然后我在Real Python上看到了一个词——<strong>"collapses"</strong>。</p>
+
+    <p>axis=0 不是"沿着行的方向"，而是<span class="hl">把行的维度坍缩掉</span>。就像把一栋楼从上往下压扁，所有楼层合成一层。axis=1 就是把列的维度坍缩掉。</p>
+
+    <p>"Collapses"——坍缩。</p>
+
+    <p>这个词像一道闪电。</p>
+
+    <p>我愣住了，然后一切都通了。原来不是"沿着某个方向"的问题——那个说法太抽象了，对初学者来说就像用一个不懂的概念去解释另一个不懂的概念。但"坍缩"是具体的、形象的：想象你用手掌从上往下一拍，所有行都被压扁了，只剩下列的信息。</p>
+
+<pre><code><span class="c">axis=0: 坍缩行 → 沿垂直方向压缩</span>
+<span class="c">┌─────────────┐</span>
+<span class="c">│  1   2   3  │  ←  行0</span>
+<span class="c">│  4   5   6  │  ←  行1</span>
+<span class="c">│  7   8   9  │  ←  行2</span>
+<span class="c">└──────┬──────┘</span>
+<span class="c">       ↓ 压扁！</span>
+<span class="c">  [12  15  18]      → 对每一列求和</span>
+<span class="c"></span>
+<span class="c">axis=1: 坍缩列 → 沿水平方向压缩</span>
+<span class="c">┌─────────────┐</span>
+<span class="c">│  1   2   3  │ →  6</span>
+<span class="c">│  4   5   6  │ → 15</span>
+<span class="c">│  7   8   9  │ → 24</span>
+<span class="c">└─────────────┘</span>
+<span class="c">  压扁！→         → 对每一行求和</span>
+</code></pre>
+
+    <div class="quote">
+        "坍缩"——这个词让我第一次感受到，编程术语也可以有诗意。<br>
+        就像物理学里的波函数坍缩：观测之前，所有可能性都在；观测之后，只剩一个确定的值。
+        <span class="author">— 日记碎片</span>
+    </div>
+
+    <p>Day 2 结束的时候，我的笔记本上画满了箭头和方框。密密麻麻的铅笔痕迹，像某种只有我能读懂的密码。我能创建数组了，能做转置了，能理解 shape 了。</p>
+
+    <p>我在笔记本最后一页写了当天学到的所有函数：</p>
+
+    <div class="info-box">
+        <strong>📝 Day 1-2 掌握的函数：</strong><br>
+        <code>np.zeros()</code> · <code>np.ones()</code> · <code>np.array()</code> · <code>arr.shape</code> · <code>arr.T</code> · <code>np.sum(axis=0)</code> · <code>np.sum(axis=1)</code> · <code>arr.reshape()</code>
+    </div>
+
+    <p>八个函数。对一个程序员来说这算什么？连入门都算不上。</p>
+
+    <p><span class="pride">但对于48小时前连Python都没打开过的我来说，这就是全世界。</span></p>
+
+    <p>那天晚上我给朋友发了一条消息："我今天写了一个3x4的零矩阵！" 朋友回了一个问号。</p>
+
+    <p><span class="emotion">有些骄傲，只有自己能懂。就像有些山顶的风景，只有爬上去的人才看得到。坐缆车上去的人看到的是同一片风景，但感受完全不同。</span></p>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== DAY 3 ==================== -->
+<div class="chapter">
+    <div class="day-mark"><span>DAY 3</span></div>
+    <h2>NaN == NaN 是 False?! 世界观碎了</h2>
+
+    <div class="mood">🤯 💔 🌌 🤔 💫</div>
+
+    <p>Day 3 的早上，我正在处理Response.csv中的缺失值。我写了一段代码来检查NaN：</p>
+
+<pre><code><span class="k">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+
+<span class="n">val</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="k">print</span><span class="o">(</span><span class="n">val</span> <span class="o">==</span> <span class="n">val</span><span class="o">)</span>
+</code></pre>
+
+<pre><code><span class="e">False</span>
+</code></pre>
+
+    <p>我揉了揉眼睛。一定是我搞错了什么。再跑了一次。</p>
+
+    <p>还是 <code>False</code>。</p>
+
+    <p><span class="emotion">一个东西，不等于它自己？</span></p>
+
+    <p>我的世界观碎了。</p>
+
+    <p>从小到大，数学课教我们的第一条公理就是：a = a。任何东西等于它自己。这不需要证明，这是公理，是逻辑大厦的第一块基石，是一切推理的起点。两千多年来没人质疑过这件事。</p>
+
+    <p>然后NaN出现了，轻轻地、冷冷地说：<strong>不。</strong></p>
+
+    <p>我打开Google，搜了 "python nan not equal to itself why"。搜索结果蹦出来一大堆，我一篇一篇地读。</p>
+
+    <p>原来这是<span class="hl">IEEE 754浮点数标准</span>的规定。NaN代表"Not a Number"——它不是一个数，它是一个"这里本该有个值但我不知道是什么"的占位符。就像你在实验记录上写了一个问号——它不代表零，不代表任何值，它代表"这个数据点缺失了"。</p>
+
+    <div class="info-box">
+        <strong>📐 IEEE 754 标准规定：</strong><br>
+        NaN 与任何值比较（包括它自己）都返回 False。这是刻意的设计，不是bug。<br>
+        要检查NaN，必须用专门的函数：<code>np.isnan(val)</code>
+    </div>
+
+    <p>我打开了Stack Overflow——这是一个全世界程序员都在用的问答网站，我后来才知道它的江湖地位——搜到了一个让我永远忘不掉的比喻：</p>
+
+    <div class="quote">
+        "NaN就像问'嫉妒是什么颜色'——你不能说两个未定义的东西相同。也许第一个'嫉妒的颜色'是紫色，第二个是灰色，你不知道。所以你不能说它们相等。"
+        <span class="author">— Stack Overflow 某匿名用户</span>
+    </div>
+
+    <p>正确的做法：</p>
+
+<pre><code><span class="c"># ❌ 永远不要这样检查NaN</span>
+<span class="k">if</span> <span class="n">val</span> <span class="o">==</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="o">:</span>   <span class="c"># 永远是False！</span>
+    <span class="k">print</span><span class="o">(</span><span class="s">"found NaN"</span><span class="o">)</span>
+
+<span class="c"># ✅ 用 np.isnan()</span>
+<span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="o">(</span><span class="n">val</span><span class="o">):</span>
+    <span class="k">print</span><span class="o">(</span><span class="s">"found NaN"</span><span class="o">)</span>
+</code></pre>
+
+    <p>那天晚上我躺在床上，关了灯，窗帘透进来一点点路灯的光。脑子里一直在转这件事。</p>
+
+    <p><span class="tears">一个东西不等于它自己——这个想法莫名其妙地让我觉得很浪漫。</span></p>
+
+    <p>也许这个世界上真的有一些东西，你无法用 "等于" 来定义。就像有些感情，你无法说"这次的悲伤和上次的一样"。每一次的 NaN 都是独一无二的空缺，都是不同的未知。</p>
+
+    <p>在实验室里，我们每天都和"未知"打交道。药物反应的不确定性，基因突变的随机性，实验结果的不可复现性。NaN 就是数据世界里的"未知"——你不能假装它不存在，也不能随便给它一个值。你只能承认它，标记它，然后小心翼翼地绕过它或者处理它。</p>
+
+    <p><span class="pride">在这个意义上，NaN 教给我的不只是编程知识，还有一种面对未知的态度。</span></p>
+
+    <p><span class="emotion">一个编程概念，让我想了一整夜哲学。我不知道这算不算"学会了编程"，但我觉得，这比记住语法重要得多。</span></p>
+
+    <h3>np.isnan() 和数据清洗的第一课</h3>
+
+    <p>理解了NaN的本质之后，我开始清洗Response.csv中的缺失值。194,750行数据里，有多少NaN？它们藏在哪里？它们会怎样影响我后面的合并？</p>
+
+<pre><code><span class="c"># 统计每一列的NaN数量</span>
+<span class="n">nan_count</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="o">(</span><span class="n">data</span><span class="o">).</span><span class="n">sum</span><span class="o">(</span><span class="n">axis</span><span class="o">=</span><span class="n">0</span><span class="o">)</span>
+<span class="k">print</span><span class="o">(</span><span class="n">nan_count</span><span class="o">)</span>
+</code></pre>
+
+    <p>注意看——我用了 <code>axis=0</code>。两天前还让我脑子短路、对着窗户发呆10分钟的东西，现在已经变成了一种本能：axis=0，坍缩行，沿垂直方向压缩，对每一列求和。不需要画图，不需要查资料，手指自然而然就敲出来了。</p>
+
+    <p><span class="pride">成长，有时候就是这样悄无声息的。你不会听到一声巨响，不会看到一道闪光。你只是在某一刻忽然发现，曾经让你痛苦的东西，现在变得理所当然了。</span></p>
+
+    <div class="ok-box">
+        <strong>✅ Day 3 总结：</strong><br>
+        理解了 NaN 的哲学意义和实际处理方法。学会了 <code>np.isnan()</code>。开始有了"数据清洗"的意识——数据不是拿来就能用的，它需要你先理解它、检查它、处理它。就像做实验之前要先检查试剂一样。
+    </div>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== DAY 4-5 ==================== -->
+<div class="chapter">
+    <div class="day-mark"><span>DAY 4 — 5</span></div>
+    <h2>pd.merge()——真正的Boss</h2>
+
+    <div class="mood">😤 🔥 😭 🐛 😭 🔥 🥹</div>
+
+    <h3>列名不一致的地狱</h3>
+
+    <p>Day 4。我终于要做"真正的事"了——合并三个数据文件。</p>
+
+    <p>前三天是基础训练。创建数组，理解shape，搞懂NaN。那些都是在小游泳池里扑腾。</p>
+
+    <p>现在，教练把我推进了大海。</p>
+
+    <p>我以为最难的部分已经过去了。我以为理解了 shape、axis、NaN，剩下的就是"把东西拼起来"。</p>
+
+    <p><span class="anger">我错了。大错特错。</span></p>
+
+    <p>第一个问题就把我打趴了：Response.csv 里的列名是 <code>Drug name</code>，而 Padel.csv 里的是 <code>drug</code>。</p>
+
+<pre><code><span class="c"># Response.csv 的列</span>
+[<span class="s">'Cell line'</span>, <span class="s">'Drug name'</span>, <span class="s">'IC50'</span>]
+
+<span class="c"># Padel.csv 的列</span>
+[<span class="s">'drug'</span>, <span class="s">'MW'</span>, <span class="s">'ALogP'</span>, ... ]   <span class="c"># 2326个分子描述符列</span>
+</code></pre>
+
+    <p>"Drug name" 和 "drug"。<span class="hl">大小写不同，中间还多了个空格，一个是两个单词一个是一个单词。</span></p>
+
+    <p>对人类来说，一眼就能看出这是同一个意思。但Python不是人类。它就是死板地、一个字符一个字符地比较，然后冷冰冰地告诉你：这是两个完全不同的东西。</p>
+
+    <p>好，我来重命名：</p>
+
+<pre><code><span class="n">padel_df</span><span class="o">.</span><span class="n">rename</span><span class="o">(</span><span class="n">columns</span><span class="o">={</span><span class="s">'drug'</span><span class="o">:</span> <span class="s">'Drug name'</span><span class="o">})</span>
+<span class="k">print</span><span class="o">(</span><span class="n">padel_df</span><span class="o">.</span><span class="n">columns</span><span class="o">[</span><span class="n">0</span><span class="o">])</span>
+</code></pre>
+
+<pre><code><span class="e">drug</span>
+</code></pre>
+
+    <p>……没有变。</p>
+
+    <p><span class="emotion">我盯着屏幕，感觉自己被嘲弄了。我明明告诉它要改名了，它为什么不改？</span></p>
+
+    <div class="err-card">
+        <div class="err-head">🐛 静默失败 — rename() 的陷阱</div>
+        <div class="err-body">
+            <p><code>rename()</code> 默认不会修改原始DataFrame。它返回一个<strong>新的</strong>DataFrame。如果你不赋值给变量，改动就丢失了。</p>
+            <p>解决方法有两种：</p>
+<pre><code><span class="c"># 方法1：加 inplace=True</span>
+<span class="n">padel_df</span><span class="o">.</span><span class="n">rename</span><span class="o">(</span><span class="n">columns</span><span class="o">={</span><span class="s">'drug'</span><span class="o">:</span> <span class="s">'Drug name'</span><span class="o">},</span> <span class="n">inplace</span><span class="o">=</span><span class="k">True</span><span class="o">)</span>
+
+<span class="c"># 方法2：重新赋值</span>
+<span class="n">padel_df</span> <span class="o">=</span> <span class="n">padel_df</span><span class="o">.</span><span class="n">rename</span><span class="o">(</span><span class="n">columns</span><span class="o">={</span><span class="s">'drug'</span><span class="o">:</span> <span class="s">'Drug name'</span><span class="o">})</span>
+</code></pre>
+        </div>
+    </div>
+
+    <p>这种"不报错但也不工作"的bug，比报红色错误还可怕。至少TypeError会告诉你"你错了"。而<code>rename()</code>什么都不说，它只是默默地把你的改动扔进了虚空。</p>
+
+    <p>我在这个bug上花了一个多小时。一个小时！就因为忘了一个参数。</p>
+
+    <p>后来我在笔记本上用红笔写了一句话，加了三个感叹号：</p>
+
+    <div class="warn-box">
+        <strong>Pandas很多函数默认不修改原始数据！！！</strong><br>
+        永远要么加 <code>inplace=True</code>，要么用 <code>df = df.method()</code> 重新赋值。<br>
+        否则你的改动就是在对着空气说话。
+    </div>
+
+    <h3>转置：理解矩阵的分水岭</h3>
+
+    <h3>转置：从理解到顿悟</h3>
+
+    <p>解决了列名问题之后，新的挑战接踵而至。合并的过程中，我需要把Padel.csv从"每行一个药物、每列一个描述符"的格式，转置成"每列一个药物"的格式，以便后续和Response数据对齐。</p>
+
+    <p>转置。听起来很简单对吧？行变列，列变行。数学课上学过的。</p>
+
+    <p><span class="emotion">但当你的矩阵有217行和2326列的时候，"转置"不再是一个抽象的数学概念，它变成了一个你必须实际操作的、会出错的、需要策略的工程问题。</span></p>
+
+    <p>转置的四个步骤，我写了整整一个下午：</p>
+
+<pre><code><span class="c"># 转置四步骤</span>
+<span class="c"># Step 1: 把drug列设为索引</span>
+<span class="n">padel_df</span> <span class="o">=</span> <span class="n">padel_df</span><span class="o">.</span><span class="n">set_index</span><span class="o">(</span><span class="s">'Drug name'</span><span class="o">)</span>
+
+<span class="c"># Step 2: 转置 — 行变列，列变行</span>
+<span class="n">padel_T</span> <span class="o">=</span> <span class="n">padel_df</span><span class="o">.</span><span class="n">T</span>
+
+<span class="c"># Step 3: 检查shape</span>
+<span class="k">print</span><span class="o">(</span><span class="n">padel_T</span><span class="o">.</span><span class="n">shape</span><span class="o">)</span>   <span class="c"># (2325, 217) — 从(217, 2325)转过来了</span>
+
+<span class="c"># Step 4: 重置索引</span>
+<span class="n">padel_T</span> <span class="o">=</span> <span class="n">padel_T</span><span class="o">.</span><span class="n">reset_index</span><span class="o">()</span>
+</code></pre>
+
+    <div class="warn-box">
+        <strong>⚠️ 为什么要先 set_index 再转置？</strong><br>
+        如果不先把 drug 列设为索引，转置后 drug 名称会消失在数据里，变成普通的一行数字。set_index 确保转置后 drug 名称变成了列头。这个细节让我卡了两个小时。
+    </div>
+
+    <h3>23,538列出现的瞬间</h3>
+
+    <h3>Day 5：从零手打，不留退路</h3>
+
+    <p>Day 5。经过昨天一整天的挣扎，我的代码终于跑通了——但说实话，那些代码像是用胶带和铁丝拼起来的。到处都是注释掉的旧代码，变量名混乱，逻辑像意大利面一样缠在一起。</p>
+
+    <p>我做了一个决定：全部删掉，从第一行开始重新写。</p>
+
+    <p>不复制，不粘贴，每一行都自己敲。把昨天的经验写进今天的代码里，把昨天的弯路在今天拉直。</p>
+
+    <p>读取三个文件。清洗列名。处理NaN。设置索引。转置。合并。检查shape。</p>
+
+    <p>手指在键盘上飞舞。不快，但稳。每敲一行，都知道自己在做什么，为什么这么做。</p>
+
+    <p>当最后的 <code>print(merged.shape)</code> 输出的那一刻——</p>
+
+<pre><code><span class="o">(</span><span class="n">194750</span><span class="o">,</span> <span class="n">23538</span><span class="o">)</span>
+</code></pre>
+
+    <p>194,750行。23,538列。</p>
+
+    <p><span class="tears">我的眼眶湿了。</span></p>
+
+    <p>我知道这很蠢。一个 <code>shape</code> 的输出而已，两个数字，一个逗号。全世界每天有几百万人在做比这复杂一百倍的事情。</p>
+
+    <p><span class="pride">但对我来说，这就是我的登月时刻。</span></p>
+
+    <p>我一个人坐在实验室里，窗外天已经黑了。屏幕的光照在我脸上，那两个数字安静地躺在那里。194750, 23538。</p>
+
+    <p><span class="emotion">我不是在看两个数字。我是在看我这五天所有的困惑、挫败、深夜的搜索、反复的报错——全都被压缩成了这两个数字。</span></p>
+
+    <div class="ok-box">
+        <strong>✅ Day 4-5 学到的教训：</strong><br>
+        1. 列名不一致是数据合并中最常见的坑——永远先检查 <code>.columns</code><br>
+        2. <code>rename()</code> 不加 <code>inplace=True</code> 或不重新赋值 = 白写<br>
+        3. 转置前先 <code>set_index()</code> ——标签和数据必须分清<br>
+        4. 手打代码比复制粘贴慢10倍，但理解深100倍
+    </div>
+
+    <p>那天晚上走出实验室的时候，天已经完全黑了。走廊里空无一人，只有应急灯发出淡绿色的光。我的脚步声在地板上回响，一下一下，像某种庆祝的鼓点。</p>
+
+    <p>推开楼门，初夏的晚风吹在脸上。我掏出手机，戴上耳机，放了一首很安静的歌。歌词我一个字都没听进去。</p>
+
+    <p><span class="emotion">脑子里只有一个念头，像心跳一样一下一下地重复——我做到了。我做到了。我做到了。</span></p>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== DAY 6-7 ==================== -->
+<div class="chapter">
+    <div class="day-mark"><span>DAY 6 — 7</span></div>
+    <h2>关掉所有参考资料</h2>
+
+    <div class="mood">💓 😶 ⌨️ ✨ 🏆</div>
+
+    <p>Day 6。</p>
+
+    <p>导师说了一句话："明天你从零开始，什么都不看，把整个流程重写一遍。"</p>
+
+    <p>那天晚上我几乎没睡。不是在复习——六天的代码已经刻在脑子里了。我是在害怕。害怕发现自己其实什么都没学会，害怕那些"理解"只是一种幻觉。</p>
+
+    <p>Day 7 的早上。我打开Jupyter Notebook。一个空白的笔记本，像一张白纸。</p>
+
+    <p>一个一个地关掉浏览器标签。Stack Overflow——关。Real Python——关。之前写的代码文件——关。Google——关。甚至把手机翻了过去，屏幕朝下。</p>
+
+    <p><span class="emotion">只剩我和一个空白的Cell。心跳加速。手指放在键盘上，微微发抖——但这次不是因为恐惧，而是因为某种说不清的期待。</span></p>
+
+    <p>深呼吸。再深呼吸。</p>
+
+    <p>闭眼。回想这六天的路径。</p>
+
+    <p>读取、清洗、重命名、set_index、转置、merge、检查shape。每一步都像走过的路一样清晰。不是记住的，是走出来的。</p>
+
+    <p>睁眼。我开始敲。</p>
+
+<pre><code><span class="k">import</span> <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="k">import</span> <span class="n">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+
+<span class="c"># 1. 读取数据</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="o">(</span><span class="s">'Response.csv'</span><span class="o">)</span>
+<span class="n">padel</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="o">(</span><span class="s">'Padel.csv'</span><span class="o">)</span>
+<span class="n">mutation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="o">(</span><span class="s">'Mutation.csv'</span><span class="o">)</span>
+
+<span class="c"># 2. 统一列名</span>
+<span class="n">padel</span> <span class="o">=</span> <span class="n">padel</span><span class="o">.</span><span class="n">rename</span><span class="o">(</span><span class="n">columns</span><span class="o">={</span><span class="s">'drug'</span><span class="o">:</span> <span class="s">'Drug name'</span><span class="o">})</span>
+
+<span class="c"># 3. 合并 Response + Padel</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="o">(</span><span class="n">response</span><span class="o">,</span> <span class="n">padel</span><span class="o">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'Drug name'</span><span class="o">,</span> <span class="n">how</span><span class="o">=</span><span class="s">'inner'</span><span class="o">)</span>
+
+<span class="c"># 4. 合并 + Mutation</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="o">(</span><span class="n">merged</span><span class="o">,</span> <span class="n">mutation</span><span class="o">,</span> <span class="n">on</span><span class="o">=</span><span class="s">'Cell line'</span><span class="o">,</span> <span class="n">how</span><span class="o">=</span><span class="s">'inner'</span><span class="o">)</span>
+
+<span class="c"># 5. 检查</span>
+<span class="k">print</span><span class="o">(</span><span class="n">final</span><span class="o">.</span><span class="n">shape</span><span class="o">)</span>
+</code></pre>
+
+<pre><code><span class="o">(</span><span class="n">194750</span><span class="o">,</span> <span class="n">23538</span><span class="o">)</span>
+</code></pre>
+
+    <p>运行。</p>
+
+    <p>绿色的输出安静地出现在屏幕上。没有红色。没有Traceback。没有TypeError。</p>
+
+    <p>12分钟。</p>
+    <p>Google 0次。</p>
+    <p>报错 0个。</p>
+
+    <div class="stats">
+        <div class="stat">
+            <div class="num">12</div>
+            <div class="lbl">分钟</div>
+        </div>
+        <div class="stat">
+            <div class="num">0</div>
+            <div class="lbl">Google 搜索次数</div>
+        </div>
+        <div class="stat">
+            <div class="num">0</div>
+            <div class="lbl">报错</div>
+        </div>
+        <div class="stat">
+            <div class="num">23,538</div>
+            <div class="lbl">列</div>
+        </div>
+    </div>
+
+    <p><span class="pride">七天前我是看到代码就发抖的人。</span></p>
+    <p><span class="pride">七天后，12分钟，23,538列。</span></p>
+
+    <div class="quote">
+        "这不是从0到1，这只是从0到0.1。<br>
+        但这个0.1，是真的。"
+        <span class="author">— Day 7 日记</span>
+    </div>
+
+    <p>导师看了我的代码，一行一行地看。没有说"很好"，没有鼓掌，没有什么戏剧性的场面。</p>
+
+    <p>他只是点了点头。一个很小的动作。然后说了一句话：</p>
+
+    <div class="quote">
+        "好。现在你可以学Pandas了。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <p><span class="tears">不知道为什么，这五个字比任何夸奖都让我想哭。鼻子一酸，赶紧低下头假装在看代码。</span></p>
+
+    <p>也许是因为我知道，这句"可以了"背后的分量。它不是廉价的鼓励，不是客套的敷衍。它是一个严格的老师给出的通行证。</p>
+
+    <p>它的意思是——你的地基打好了。你可以往上建了。</p>
+
+    <p>而我知道，这个地基有多扎实。因为每一寸都是我用自己的手，在黑暗中摸索着砌起来的。</p>
+</div>
+
+<div class="divider">· · · · ·</div>
+
+<!-- ==================== 教授的教育哲学 ==================== -->
+<div class="chapter">
+    <div class="ch-label">教育哲学篇</div>
+    <h2>Nam教授的教育哲学——为什么用NumPy不用Pandas</h2>
+
+    <p>故事讲完了。</p>
+
+    <p>但还有一个问题悬在空中，从第一天就在，一直没回答：</p>
+
+    <p><span class="hl">教授为什么非要让我先用NumPy？直接用Pandas不是更快吗？</span></p>
+
+    <p>是的，更快。快得多。也许十分钟就能搞定我花了七天才完成的事情。</p>
+
+    <p>但那样的话，这篇文章就不会存在。那些眼泪、那些顿悟、那些深夜的自我对话——都不会发生。</p>
+
+    <h3>Pandas vs NumPy：一行 vs 五步</h3>
+
+    <p>先看看这两个工具在做同一件事时的差距有多大：</p>
+
+    <div class="compare">
+        <div class="left">
+            <h4>🐼 Pandas 的做法</h4>
+<pre><code><span class="c"># 一行搞定</span>
+<span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="o">(</span><span class="n">df1</span><span class="o">,</span> <span class="n">df2</span><span class="o">,</span>
+         <span class="n">on</span><span class="o">=</span><span class="s">'key'</span><span class="o">)</span>
+</code></pre>
+            <p style="text-align:center; font-size:0.85em; color:#27ae60;">一行代码。优雅。简洁。</p>
+        </div>
+        <div class="right">
+            <h4>🔢 NumPy 的做法</h4>
+<pre><code><span class="c"># 五步手动合并</span>
+<span class="n">result</span> <span class="o">=</span> <span class="o">[]</span>
+<span class="k">for</span> <span class="n">key</span> <span class="k">in</span> <span class="n">keys</span><span class="o">:</span>
+    <span class="n">mask1</span> <span class="o">=</span> <span class="n">arr1</span><span class="o">[:,</span><span class="n">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">key</span>
+    <span class="n">mask2</span> <span class="o">=</span> <span class="n">arr2</span><span class="o">[:,</span><span class="n">0</span><span class="o">]</span> <span class="o">==</span> <span class="n">key</span>
+    <span class="n">row</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="o">(</span>
+        <span class="o">[</span><span class="n">arr1</span><span class="o">[</span><span class="n">mask1</span><span class="o">],</span>
+         <span class="n">arr2</span><span class="o">[</span><span class="n">mask2</span><span class="o">]],</span>
+        <span class="n">axis</span><span class="o">=</span><span class="n">1</span><span class="o">)</span>
+    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="o">(</span><span class="n">row</span><span class="o">)</span>
+<span class="n">final</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="o">(</span><span class="n">result</span><span class="o">)</span>
+</code></pre>
+            <p style="text-align:center; font-size:0.85em; color:#c0392b;">五步。繁琐。但每一步都透明。</p>
+        </div>
+    </div>
+
+    <p>看到了吗？Pandas 一行代码就能做到的事，NumPy 需要写一个循环、布尔索引、concatenate、vstack——代码量是五倍以上。</p>
+
+    <p>从效率的角度看，Pandas完胜。从"赶紧把活干完"的角度看，Pandas是毫无疑问的正确选择。工作中、生产环境里，你当然应该用Pandas，用最高效的工具把事情做好。没有人会因为你用了Pandas而批评你。</p>
+
+    <p>但这不是工作。这是<strong>学习</strong>。学习和工作的逻辑完全不同。</p>
+
+    <p>那教授为什么还要这么做？</p>
+
+    <p>答案藏在一个比喻里——</p>
+
+    <div class="compare">
+        <div class="left">
+            <h4>🛗 Pandas = 坐电梯</h4>
+            <p>按一下按钮，"叮"，到了。你不知道电梯怎么运作，不知道钢缆怎么拉，不知道配重怎么平衡。但你到了。快。舒服。</p>
+        </div>
+        <div class="right">
+            <h4>🧗 NumPy = 爬楼梯</h4>
+            <p>一步一步，气喘吁吁。但你知道每一层楼的结构，知道楼梯拐弯的角度，知道这栋楼有多高。你到的时候，你不只是"到了"——你<strong>理解了</strong>这栋楼。</p>
+        </div>
+    </div>
+
+    <h3>五个原因</h3>
+
+    <p>后来我找到Nam教授，坐在他办公室那张堆满论文的桌子对面，问了他这个问题。</p>
+
+    <p>他放下手里的咖啡杯，靠在椅背上，想了一会儿。然后他开始说——一口气说了很多。我能感觉到，这些话他已经想了很久，也许说过很多次，但每一次说的时候依然带着某种认真。</p>
+
+    <p>他的回答让我震动。</p>
+
+    <h3>原因一：Pandas是"黑箱"，NumPy是透明的 🔍</h3>
+
+    <div class="quote">
+        "你用 pd.merge()，一行就出结果。但你知道它内部做了什么吗？它怎么匹配key的？遇到重复key怎么办？inner join和outer join在底层有什么区别？<br><br>
+        你用NumPy手写一遍，你就知道了。因为每一步都是你自己写的。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <h3>原因二：shape思维是数据科学的地基 📐</h3>
+
+    <div class="quote">
+        "我见过太多学生，用Pandas用了两年，还是不知道自己的数据是什么形状。(500, 20) 和 (20, 500) 对他们来说没区别。但在机器学习里，这个区别会让你的模型直接崩溃。<br><br>
+        NumPy强迫你时时刻刻关注shape。这个习惯，比任何函数都值钱。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <h3>原因三：转置是理解矩阵思维的分水岭 🔄</h3>
+
+    <div class="quote">
+        "你做的那个 set_index + .T 的操作，很多人觉得很简单。但这里面藏着一个核心问题：为什么要先设索引再转置？因为转置不只是'行变列'——它改变的是数据的语义。先设索引，是为了告诉程序'这一列是标签，不是数据'。<br><br>
+        能理解这个，说明你开始用矩阵的方式思考了。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <h3>原因四：debug能力比写代码重要10倍 🐛</h3>
+
+    <p>教授列了一张单子：</p>
+
+    <div class="info-box">
+        <strong>🐛 初学者最常遇到的错误类型：</strong>
+        <ul>
+            <li><strong>TypeError</strong> — 参数类型不对（如 np.zeros(3,4)）</li>
+            <li><strong>ValueError</strong> — 形状不匹配（shapes not aligned）</li>
+            <li><strong>KeyError</strong> — 列名拼写/大小写不对</li>
+            <li><strong>静默失败</strong> — 没报错但结果不对（如 rename 没加 inplace）</li>
+            <li><strong>逻辑错误</strong> — 代码能跑但意思不对（如 NaN == NaN 的坑）</li>
+        </ul>
+    </div>
+
+    <div class="quote">
+        "Pandas 帮你封装了太多东西，你遇到的bug都是高级的、抽象的。但NumPy的bug是底层的、具体的——你在这里学会debug，以后用什么工具都不怕。<br><br>
+        会写代码的人多的是。会debug的人，才是真正值钱的。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <h3>原因五：脱敏训练——工具会变，能力不会 🏋️</h3>
+
+    <div class="quote">
+        "五年前大家用R，现在大家用Python。五年后说不定又换了。工具永远在变。但理解数据结构、理解shape、理解索引匹配——这些能力不变。<br><br>
+        我让你用NumPy，就像让你学手动挡。你会开手动挡了，自动挡随便开。但反过来，只会自动挡的人，给他一辆手动挡的车，他会在半坡起步的时候熄火。"
+        <span class="author">— Nam教授</span>
+    </div>
+
+    <p style="text-align:center; margin: 40px 0;">· · ·</p>
+
+    <h3>后记：从手动挡到自动挡</h3>
+
+    <p>现在的我已经开始使用Pandas了。说实话，当我第一次用 <code>pd.merge()</code> 一行代码完成了之前用NumPy写了五步的合并操作时，我的感受不是"哇好方便"，而是——</p>
+
+    <p><span class="emotion">"原来 pd.merge() 在背后帮我做了这么多事。"</span></p>
+
+    <p>我能感受到那一行代码背后的重量。因为我曾经用NumPy手动搬过那些重量。我知道布尔索引在做什么，知道concatenate怎么拼接，知道vstack如何堆叠。我知道 <code>on='Drug name'</code> 背后是一个个key的匹配循环，知道 <code>how='inner'</code> 意味着只保留两边都有的数据。</p>
+
+    <p>Pandas没有变成一个魔法盒子——它变成了一个我理解的工具。一个我可以信任的工具，因为我知道它在做什么。</p>
+
+    <p>这就是Nam教授想要的效果。不是让你痛苦，而是让你<strong>理解</strong>。理解之后的使用，和不理解的使用，表面上看起来一模一样——都是一行 <code>pd.merge()</code>——但本质上完全不同。</p>
+
+    <p>五个原因，每一个都让我说不出话。</p>
+
+    <p>我回想起自己这七天的经历。那些TypeError，那些在axis上的困惑，那个 NaN 不等于自己的深夜，那个 rename() 静默失败的下午——那些痛苦不是bug，<span class="hl">那些痛苦是课程</span>。</p>
+
+    <p>每一个报错信息，都是一扇通往理解的门。只不过开门的钥匙，必须你自己去找。没有人能替你找。</p>
+
+    <p>如果有人帮你开了门，你看到的只是门后面的房间。</p>
+
+    <p>但如果你自己找到了钥匙，自己转动了锁——你看到的不只是房间，你还看到了通往这个房间的路。下次遇到类似的门，你就知道钥匙大概在哪里。</p>
+
+    <p>教授不是在为难我。他是在<strong>保护</strong>我——保护我不要在还没有地基的时候就盖高楼，不要在还不会走的时候就想跑。</p>
+
+    <p>现在的我理解了：那些用NumPy手写for循环的笨拙日子，那些反复检查shape的枯燥时刻，那些因为一个括号debug半小时的深夜——那些都不是浪费时间。那些是<span class="hl">我这辈子最高效的学习</span>。</p>
+
+    <p>因为从那以后，我再也没有忘记shape的重要性。再也没有在列名匹配上犯错。再也不会被 <code>axis</code> 搞晕。</p>
+
+    <p><span class="emotion">有些东西必须痛过才能记住。教授比任何人都清楚这一点。</span></p>
+
+    <div class="quote" style="background: linear-gradient(135deg, #f5f0e8, #fdf8ef); border-left: 4px solid #c9a84c; padding: 24px 28px;">
+        "我教的不是NumPy，也不是Pandas。<br>
+        我教的是——<strong>如何在不懂的时候，靠自己搞懂。</strong>"
+        <span class="author">— Nam教授</span>
+    </div>
+</div>
+
+<div class="divider">· · · · ·</div>
+
+<!-- ==================== 写给读者的信 ==================== -->
+<div class="chapter">
+    <div class="ch-label">写给你的信</div>
+    <h2>给和七天前的我一样的你</h2>
+
+    <div class="letter">
+        <p>亲爱的陌生人，</p>
+
+        <p>如果你正在读这篇文章，也许你也是一个编程初学者。也许你也面对着几个CSV文件不知所措。也许你也在深夜的实验室里对着报错信息叹气。也许你也在想"要不要直接用AI帮我写"。</p>
+
+        <p>我理解那种感觉。那种"周围的人似乎都会，只有我不会"的孤独感。那种"也许我天生就不适合写代码"的自我怀疑。</p>
+
+        <p>我想告诉你的是：七天前的我，比你现在更不会。我连 <code>print</code> 后面要加括号都不知道。</p>
+
+        <p>我不能告诉你什么是"正确答案"。但我可以分享五件这七天教给我的事：</p>
+
+        <p><strong>一、先学NumPy，再学Pandas。</strong><br>
+        不是因为NumPy更好，而是因为NumPy会让你理解Pandas到底帮你省了多少事。只有知道"手动挡"有多难，你才会真正理解"自动挡"的价值——同时也不会在自动挡失灵的时候手足无措。</p>
+
+        <p><strong>二、手打代码，不要复制粘贴。</strong><br>
+        复制粘贴就像看别人游泳的视频——你看了一百遍也学不会换气。手打很慢，会犯错，你的括号会打错地方，你的变量名会拼错，你会在逗号和分号之间反复纠结。但每一个错误都会在你的肌肉记忆里刻下痕迹。那些痕迹就是你的能力。日积月累，这些痕迹会变成直觉。</p>
+
+        <p><strong>三、错误是最好的老师。</strong><br>
+        每一个TypeError、每一个ValueError、每一个红色的Traceback——它们不是在惩罚你，它们是在教你。它们在告诉你："你的理解有偏差，让我来帮你矫正。"当你修好一个bug的时候，你学到的东西比读十页教程都多。拥抱错误，不要害怕它们。每一个红色错误信息的背后，都藏着一个"啊原来如此"的瞬间。</p>
+
+        <p><strong>四、学习阶段，克制使用AI。</strong><br>
+        AI是一个无比强大的工具。未来的某一天你一定会用它，你也应该用它。但在学习阶段，它像一把双刃剑。它给你的答案太快了、太完美了，快到你来不及思考"为什么"。你拿到了答案，但失去了理解的过程。而那个过程，才是真正有价值的东西。当你还在建地基的时候，用双手搬砖，不要用起重机。地基上的每一块砖，都应该是你亲手放上去的。</p>
+
+        <p><strong>五、给自己设一个"从零重建"的测试。</strong><br>
+        学完一个知识点后，关掉所有参考资料，从空白开始重写。如果你能做到——恭喜你，你真的学会了。如果做不到——也恭喜你，你知道自己还需要学什么了。这个测试比做一百道选择题都管用。</p>
+
+        <p style="text-indent: 0; margin-top: 24px;">这七天我学到了多少Python？也许只有别人一天学的量。我的代码肯定不漂亮，变量名可能不规范，注释可能写得太多。</p>
+
+        <p>但我学到了一些比Python更重要的东西——我学到了<strong>如何学习</strong>。</p>
+
+        <p>不依赖任何人。不依赖任何工具。只依赖自己那颗慢吞吞的、经常犯错的、但始终没有放弃的脑袋。</p>
+
+        <p>这颗脑袋，是你最可靠的编译器。永远不会过时，永远不会被替代。</p>
+
+        <p style="text-indent: 0; text-align: center; margin-top: 30px; font-weight: 600; color: #415a77;">
+            代码很短。旅程很长。<br>
+            但理解永远属于你。
+        </p>
+    </div>
+</div>
+
+<div class="divider">· · ·</div>
+
+<!-- ==================== 结尾 ==================== -->
+<div class="chapter">
+    <p style="text-align: center; font-style: italic; color: #8b7355; line-height: 2.4; font-size: 1.08em; max-width: 480px; margin: 50px auto; padding: 30px 0;">
+        不是给你鱼，<br>
+        不是给你鱼竿，<br>
+        而是把你扔进河里，<br>
+        然后在岸上看着你，<br>
+        直到你自己学会游泳。<br><br>
+        <span style="font-size: 0.8em; color: #aaa;">——献给每一位"从0到0.1"路上的人</span>
+    </p>
+
+    <p style="text-align: center; margin-top: 20px; color: #bbb; font-size: 0.88em;">
+        感谢你读到这里。<br>
+        如果这篇文章让你觉得"也许我也可以试试"，<br>
+        那它就已经完成了它的使命。
+    </p>
+</div>
+
+</div><!-- /blog-container -->
+
+<!-- ========== FOOTER ========== -->
+<footer class="blog-footer">
+    <p>Built by <a href="https://github.com/mrfeixiang"><strong>@mrfeixiang</strong></a></p>
+    <p style="margin-top: 8px;">
+        <a href="https://github.com/mrfeixiang">GitHub</a>
+    </p>
+    <p style="margin-top: 10px; font-size: 0.82em;">
+        Drug Response Prediction Lab &nbsp;|&nbsp; 2026
+    </p>
+    <p style="margin-top: 12px; font-size: 0.78em; opacity: 0.5;">
+        NumPy · Pandas · Python · 数据合并 · 药物反应预测 · 编程初学者 · 数据科学入门 · 矩阵运算 · IEEE 754 · 从零到0.1
+    </p>
+</footer>
+
+</body>
+</html>
